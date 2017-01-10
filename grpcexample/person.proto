@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+package grpcexample;
+
+service GRPCExample {
+  rpc GetPerson(Request) returns (Person) {}
+  rpc ListPeople(Request) returns (stream Person) {}
+}
+
+message Request {
+}
+
+message Person {
+  string name = 1;
+  int32 id = 2;
+  string email = 3;
+
+  enum PhoneType {
+    MOBILE = 0;
+    HOME = 1;
+    WORK = 2;
+  }
+
+  message PhoneNumber {
+    string number = 1;
+    PhoneType type = 2;
+  }
+
+  repeated PhoneNumber phone = 4;
+}
